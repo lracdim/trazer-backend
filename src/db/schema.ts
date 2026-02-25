@@ -676,3 +676,22 @@ export const storageUsage = pgTable(
 export const storageUsageRelations = relations(storageUsage, ({ one }) => ({
     organization: one(organizations, { fields: [storageUsage.organizationId], references: [organizations.id] }),
 }));
+
+// ============================================================
+// TRIAL APPLICATIONS
+// ============================================================
+export const trialApplications = pgTable("trial_applications", {
+    id: uuid("id").defaultRandom().primaryKey(),
+    companyName: varchar("company_name", { length: 255 }).notNull(),
+    companyEmail: varchar("company_email", { length: 255 }).notNull().unique(),
+    industry: varchar("industry", { length: 100 }).notNull(),
+    companySize: varchar("company_size", { length: 50 }).notNull(),
+    country: varchar("country", { length: 100 }).notNull(),
+    fullName: varchar("full_name", { length: 255 }).notNull(),
+    jobTitle: varchar("job_title", { length: 100 }).notNull(),
+    phoneNumber: varchar("phone_number", { length: 50 }).notNull(),
+    monthlyUsers: integer("monthly_users").notNull(),
+    status: varchar("status", { length: 50 }).notNull().default("pending"), // pending, verified, converted, rejected
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+});

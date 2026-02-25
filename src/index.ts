@@ -77,6 +77,10 @@ app.use("/api/admin", adminRoutes);
 import hqRoutes from "./routes/hq.routes.js";
 app.use("/api/hq", hqRoutes);
 
+// Public Routes (Trial Application, etc.)
+import publicRoutes from "./routes/public.routes.js";
+app.use("/api/public", publicRoutes);
+
 // ========================
 // Global Error Handler (must be last)
 // ========================
